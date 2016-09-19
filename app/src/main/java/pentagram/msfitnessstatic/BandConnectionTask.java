@@ -17,19 +17,31 @@ import com.microsoft.band.sensors.BandAccelerometerEvent;
 import com.microsoft.band.sensors.BandAccelerometerEventListener;
 import com.microsoft.band.sensors.BandAltimeterEvent;
 import com.microsoft.band.sensors.BandAltimeterEventListener;
+import com.microsoft.band.sensors.BandAmbientLightEvent;
 import com.microsoft.band.sensors.BandAmbientLightEventListener;
+import com.microsoft.band.sensors.BandBarometerEvent;
 import com.microsoft.band.sensors.BandBarometerEventListener;
+import com.microsoft.band.sensors.BandCaloriesEvent;
 import com.microsoft.band.sensors.BandCaloriesEventListener;
+import com.microsoft.band.sensors.BandContactEvent;
 import com.microsoft.band.sensors.BandContactEventListener;
+import com.microsoft.band.sensors.BandDistanceEvent;
 import com.microsoft.band.sensors.BandDistanceEventListener;
+import com.microsoft.band.sensors.BandGsrEvent;
 import com.microsoft.band.sensors.BandGsrEventListener;
+import com.microsoft.band.sensors.BandGyroscopeEvent;
 import com.microsoft.band.sensors.BandGyroscopeEventListener;
 import com.microsoft.band.sensors.BandHeartRateEvent;
 import com.microsoft.band.sensors.BandHeartRateEventListener;
+import com.microsoft.band.sensors.BandPedometerEvent;
 import com.microsoft.band.sensors.BandPedometerEventListener;
+import com.microsoft.band.sensors.BandRRIntervalEvent;
 import com.microsoft.band.sensors.BandRRIntervalEventListener;
+import com.microsoft.band.sensors.BandSkinTemperatureEvent;
 import com.microsoft.band.sensors.BandSkinTemperatureEventListener;
+import com.microsoft.band.sensors.BandUVEvent;
 import com.microsoft.band.sensors.BandUVEventListener;
+import com.microsoft.band.sensors.GsrSampleRate;
 import com.microsoft.band.sensors.HeartRateConsentListener;
 import com.microsoft.band.sensors.SampleRate;
 
@@ -75,11 +87,22 @@ public class BandConnectionTask extends AsyncTask<String, String, String> {
     public BandConnectionTask(Activity context, TextView heartRateValueTextView,
                               TextView accelerometerValueTextView, TextView altimeterValueTextView, TextView ambientLightValueTextView, TextView barometerValueTextView, TextView caloriesValueTextView,
                               TextView contactValueTextView, TextView distanceValueTextView, TextView gsrValueTextView, TextView gyroscopeValueTextView, TextView pedometerValueTextView,
-                              TextView rrIntervalValueTextView, TextView skinTemperatureValueTextView, TextView uvTextValueView) {
+                              TextView rrIntervalValueTextView, TextView skinTemperatureValueTextView, TextView uvValueTextView) {
         this.activity = context;
         this.heartRateTextView = heartRateValueTextView;
         this.accelerometerTextView = accelerometerValueTextView;
         this.altimeterTextView = altimeterValueTextView;
+        this.ambientLightTextView = ambientLightValueTextView;
+        this.barometerTextView = barometerValueTextView;
+        this.caloriesTextView = caloriesValueTextView;
+        this.contactTextView = contactValueTextView;
+        this.distanceTextView = distanceValueTextView;
+        this.gsrTextView = gsrValueTextView;
+        this.gyroscopeTextView = gyroscopeValueTextView;
+        this.pedometerTextView = pedometerValueTextView;
+        this.rrIntervalTextView = rrIntervalValueTextView;
+        this.skinTemperatureTextView = skinTemperatureValueTextView;
+        this.uvTextView = uvValueTextView;
 
         heartRateEventListener = new BandHeartRateEventListener() {
             @Override
@@ -120,6 +143,128 @@ public class BandConnectionTask extends AsyncTask<String, String, String> {
                 });
             }
         };
+        ambientLightEventListener = new BandAmbientLightEventListener() {
+            @Override
+            public void onBandAmbientLightChanged(final BandAmbientLightEvent bandAmbientLightEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ambientLightTextView.setText(String.format("Brightness : %s\n", bandAmbientLightEvent.getBrightness()));
+                    }
+                });
+            }
+        };
+        barometerEventListener = new BandBarometerEventListener() {
+            @Override
+            public void onBandBarometerChanged(final BandBarometerEvent bandBarometerEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        barometerTextView.setText(String.format("AirPressure : %s\nTemperature : %s\n", bandBarometerEvent.getAirPressure(), bandBarometerEvent.getTemperature()));
+                    }
+                });
+            }
+        };
+        caloriesEventListener = new BandCaloriesEventListener() {
+            @Override
+            public void onBandCaloriesChanged(final BandCaloriesEvent bandCaloriesEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        caloriesTextView.setText(String.format("Calories : %s\n", bandCaloriesEvent.getCalories()));
+                    }
+                });
+            }
+        };
+        contactEventListener = new BandContactEventListener() {
+            @Override
+            public void onBandContactChanged(final BandContactEvent bandContactEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        contactTextView.setText(String.format("Contact State : %s\n", bandContactEvent.getContactState()));
+                    }
+                });
+            }
+        };
+        distanceEventListener = new BandDistanceEventListener() {
+            @Override
+            public void onBandDistanceChanged(final BandDistanceEvent bandDistanceEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        distanceTextView.setText(String.format("Current Motion : %s\nPace : %s\nSpeed : %s\nTotal Distance : %s\n",
+                                bandDistanceEvent.getMotionType(), bandDistanceEvent.getPace(), bandDistanceEvent.getSpeed(), bandDistanceEvent.getTotalDistance()));
+                    }
+                });
+            }
+        };
+        gsrEventListener = new BandGsrEventListener() {
+            @Override
+            public void onBandGsrChanged(final BandGsrEvent bandGsrEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        gsrTextView.setText(String.format("Resistance : %s\n", bandGsrEvent.getResistance()));
+                    }
+                });
+            }
+        };
+        gyroscopeEventListener = new BandGyroscopeEventListener() {
+            @Override
+            public void onBandGyroscopeChanged(final BandGyroscopeEvent bandGyroscopeEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        gyroscopeTextView.setText(String.format("AngularVelocityX : %s\nAngularVelocityY : %s\nAngularVelocityZ : %s\n",
+                                bandGyroscopeEvent.getAngularVelocityY(), bandGyroscopeEvent.getAngularVelocityY(), bandGyroscopeEvent.getAngularVelocityZ()));
+                    }
+                });
+            }
+        };
+        pedometerEventListener = new BandPedometerEventListener() {
+            @Override
+            public void onBandPedometerChanged(final BandPedometerEvent bandPedometerEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pedometerTextView.setText(String.format("TotalSteps : %s\n", bandPedometerEvent.getTotalSteps()));
+                    }
+                });
+            }
+        };
+        rrIntervalEventListener = new BandRRIntervalEventListener() {
+            @Override
+            public void onBandRRIntervalChanged(final BandRRIntervalEvent bandRRIntervalEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        rrIntervalTextView.setText(String.format("Interval : %s\n", bandRRIntervalEvent.getInterval()));
+                    }
+                });
+            }
+        };
+        skinTemperatureEventListener = new BandSkinTemperatureEventListener() {
+            @Override
+            public void onBandSkinTemperatureChanged(final BandSkinTemperatureEvent bandSkinTemperatureEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        skinTemperatureTextView.setText(String.format("Skin Temperature : %s\n", bandSkinTemperatureEvent.getTemperature()));                    }
+                });
+            }
+        };
+        uvEventListener = new BandUVEventListener() {
+            @Override
+            public void onBandUVChanged(final BandUVEvent bandUVEvent) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        uvTextView.setText(String.format("Index Level : %s\n", bandUVEvent.getUVIndexLevel()));
+                    }
+                });
+            }
+        };
     }
 
     @Override
@@ -152,6 +297,17 @@ public class BandConnectionTask extends AsyncTask<String, String, String> {
                 bandClient.getSensorManager().registerHeartRateEventListener(heartRateEventListener);
                 bandClient.getSensorManager().registerAccelerometerEventListener(accelerometerEventListener, SampleRate.MS16);
                 bandClient.getSensorManager().registerAltimeterEventListener(altimeterEventListener);
+                bandClient.getSensorManager().registerAmbientLightEventListener(ambientLightEventListener);
+                bandClient.getSensorManager().registerBarometerEventListener(barometerEventListener);
+                bandClient.getSensorManager().registerCaloriesEventListener(caloriesEventListener);
+                bandClient.getSensorManager().registerContactEventListener(contactEventListener);
+                bandClient.getSensorManager().registerDistanceEventListener(distanceEventListener);
+                bandClient.getSensorManager().registerGsrEventListener(gsrEventListener, GsrSampleRate.MS200);
+                bandClient.getSensorManager().registerGyroscopeEventListener(gyroscopeEventListener, SampleRate.MS16);
+                bandClient.getSensorManager().registerPedometerEventListener(pedometerEventListener);
+                bandClient.getSensorManager().registerRRIntervalEventListener(rrIntervalEventListener);
+                bandClient.getSensorManager().registerSkinTemperatureEventListener(skinTemperatureEventListener);
+                bandClient.getSensorManager().registerUVEventListener(uvEventListener);
             }else{
                 Log.d("connection", "failed!");
             }
