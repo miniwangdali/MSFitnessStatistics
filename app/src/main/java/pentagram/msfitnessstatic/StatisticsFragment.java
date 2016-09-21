@@ -1,7 +1,7 @@
 package pentagram.msfitnessstatic;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -41,10 +41,12 @@ public class StatisticsFragment extends Fragment {
         TextView skinTemperatureTextView = (TextView)view.findViewById(R.id.skin_temperature_text);
         TextView uvTextView = (TextView)view.findViewById(R.id.uv_text);
 
-        BandConnectionTask myTask = new BandConnectionTask(getActivity(), heartRateTextView, accelerometerTextView, altimeterTextView, ambientLightTextView, barometerTextView, caloriesTextView, contactTextView,
+        BandDataCollectionTask myTask = new BandDataCollectionTask(getActivity(), heartRateTextView, accelerometerTextView, altimeterTextView, ambientLightTextView, barometerTextView, caloriesTextView, contactTextView,
                 distanceTextView, gsrTextView, gyroscopeTextView, pedometerTextView, rrIntervalTextView, skinTemperatureTextView, uvTextView);
         myTask.execute("");
 
+        Intent intent = new Intent(getActivity(), BandDataSenderIntentService.class);
+        getActivity().startService(intent);
         return view;
     }
 

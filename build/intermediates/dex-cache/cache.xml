@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\wang_\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_d68038575bc057c6077f4a9be132414a96959b6a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f1f6689347355b7784a0062108a8a6c0dc1988c2">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_383d89b6bf9656f2056ca0917de6418653caf339.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_9cb92f9cf3cb94cae803ec4493e01774c4563e67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="5bc8fe6f45b8311a33baefa3f1a470011e151d63">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\instant-run_2b66168ffb60e8d22824809bdf0598cba0afb728.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_607a73ea00432589338941a66263ceceb5676c86.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_90b497cac908f7adeac845d564cc28c7afd96f69.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_968a12883b719bdf5cf71b852b79eaf11a535023.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\libs\microsoft-band-1.3.20307.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f14888994429a404549c37653bc6e4c6a8c39a8e">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\microsoft-band-1.3.20307.2_d510f7afcfa42f5b028e5ac54b50cdf163622f63.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_db03eb42b1648f358ccbff80f020628cc4b9f428.jar" />
+    </item>
+
+</items>
