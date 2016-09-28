@@ -22,8 +22,9 @@
         </activity>
 
         <service
-            android:name=".BandDataSenderIntentService"
-            android:exported="false"></service>
+            android:name=".BandDataSenderService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

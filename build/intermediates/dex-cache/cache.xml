@@ -3,6 +3,15 @@
 
     <item
         is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\libs\ksoap2-android-assembly-3.6.1-jar-with-dependencies.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="b37dc43b673256709b75daab4850b0c017459ec6">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-3.6.1-jar-with-dependencies_d0a7290a63c4a922551b514a48d7d3c6bf5396be.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\wang_\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
         jumboMode="true"
         optimize="true"
@@ -16,8 +25,17 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="f1f6689347355b7784a0062108a8a6c0dc1988c2">
+        sha1="85a1f18702f6662a9d963bda40381e373ff0eab1">
         <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_383d89b6bf9656f2056ca0917de6418653caf339.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="G:\MSFitnessStatistics\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="b093974c3f31417db1173b00fd57c589b652a02a">
+        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\instant-run_2b66168ffb60e8d22824809bdf0598cba0afb728.jar" />
     </item>
     <item
         is-multidex="false"
@@ -27,15 +45,6 @@
         revision="23.0.3"
         sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
         <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_9cb92f9cf3cb94cae803ec4493e01774c4563e67.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="G:\MSFitnessStatistics\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="5bc8fe6f45b8311a33baefa3f1a470011e151d63">
-        <dex dex="G:\MSFitnessStatistics\app\build\intermediates\pre-dexed\debug\instant-run_2b66168ffb60e8d22824809bdf0598cba0afb728.jar" />
     </item>
     <item
         is-multidex="false"

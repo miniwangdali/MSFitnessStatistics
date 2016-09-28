@@ -12,6 +12,7 @@ import com.microsoft.band.BandInfo;
 import com.microsoft.band.BandIOException;
 import com.microsoft.band.BandPendingResult;
 import com.microsoft.band.ConnectionState;
+import com.microsoft.band.InvalidBandVersionException;
 import com.microsoft.band.UserConsent;
 import com.microsoft.band.sensors.BandAccelerometerEvent;
 import com.microsoft.band.sensors.BandAccelerometerEventListener;
@@ -110,7 +111,9 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        heartRateTextView.setText(String.format("%d", bandHeartRateEvent.getHeartRate()));
+                        DataValue.heartRate = bandHeartRateEvent.getHeartRate();
+                        DataValue.heartQuality = bandHeartRateEvent.getQuality();
+                        heartRateTextView.setText(String.format("%s", DataValue.heartRate));
 //                        Log.d("heartRate", String.format("Heart Rate = %d beats per minute\n" + "Quality = %s\n", bandHeartRateEvent.getHeartRate(), bandHeartRateEvent.getQuality()));
                     }
                 });
@@ -123,7 +126,11 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        accelerometerTextView.setText(String.format("X : %.4s\nY : %.4s\nZ : %.4s", bandAccelerometerEvent.getAccelerationX(), bandAccelerometerEvent.getAccelerationY(), bandAccelerometerEvent.getAccelerationZ()));
+                        DataValue.accelerationX = bandAccelerometerEvent.getAccelerationX();
+                        DataValue.accelerationY = bandAccelerometerEvent.getAccelerationY();
+                        DataValue.accelerationZ = bandAccelerometerEvent.getAccelerationZ();
+                        accelerometerTextView.setText(String.format("X : %.4s\nY : %.4s\nZ : %.4s",
+                                DataValue.accelerationX, DataValue.accelerationY, DataValue.accelerationZ));
 
                     }
                 });
@@ -136,9 +143,24 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        altimeterTextView.setText(String.format("FlightsAscended : %s\nFlightsDescended : %s\nRate : %s\nSteppingGain : %s\nSteppingLoss : %s\nStepsAscended : %s\nStepsDescended : %s\nTotalGain : %s\nTotalGain : %s\n",
-                                 bandAltimeterEvent.getFlightsAscended(), bandAltimeterEvent.getFlightsDescended(), bandAltimeterEvent.getRate(), bandAltimeterEvent.getSteppingGain(), bandAltimeterEvent.getSteppingLoss(),
-                                bandAltimeterEvent.getStepsAscended(), bandAltimeterEvent.getStepsDescended(), bandAltimeterEvent.getTotalGain(), bandAltimeterEvent.getTotalLoss()));
+                        DataValue.flightsAscended = bandAltimeterEvent.getFlightsAscended();
+                        DataValue.flightsDescended = bandAltimeterEvent.getFlightsDescended();
+                        DataValue.altimeterRate = bandAltimeterEvent.getRate();
+                        DataValue.steppingGain = bandAltimeterEvent.getSteppingGain();
+                        DataValue.steppingLoss = bandAltimeterEvent.getSteppingLoss();
+                        DataValue.stepsAscended = bandAltimeterEvent.getStepsAscended();
+                        DataValue.stepsDescended = bandAltimeterEvent.getStepsDescended();
+                        try{
+                            DataValue.flightsAscendedToday = bandAltimeterEvent.getFlightsAscendedToday();
+                            DataValue.totalGainToday = bandAltimeterEvent.getTotalGainToday();
+                        } catch (InvalidBandVersionException e) {
+                            e.printStackTrace();
+                        }
+                        DataValue.totalGain = bandAltimeterEvent.getTotalGain();
+                        DataValue.totalLoss = bandAltimeterEvent.getTotalLoss();
+                        altimeterTextView.setText(String.format("FlightsAscendedToday : %s\nFlightsDescended : %s\nRate : %s\nSteppingGain : %s\nSteppingLoss : %s\nStepsAscended : %s\nStepsDescended : %s\nTotalGainToday : %s\nTotalLoss : %s",
+                                DataValue.flightsAscendedToday, DataValue.flightsDescended, DataValue.altimeterRate, DataValue.steppingGain,
+                                DataValue.steppingLoss, DataValue.stepsAscended, DataValue.stepsDescended, DataValue.totalGainToday, DataValue.totalLoss));
                     }
                 });
             }
@@ -149,7 +171,8 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ambientLightTextView.setText(String.format("%s", bandAmbientLightEvent.getBrightness()));
+                        DataValue.brightness = bandAmbientLightEvent.getBrightness();
+                        ambientLightTextView.setText(String.format("%s", DataValue.brightness));
                     }
                 });
             }
@@ -160,7 +183,10 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        barometerTextView.setText(String.format("Air Pressure : %.7s\nTemperature : %.4s\n", bandBarometerEvent.getAirPressure(), bandBarometerEvent.getTemperature()));
+                        DataValue.airPressure = bandBarometerEvent.getAirPressure();
+                        DataValue.temperature = bandBarometerEvent.getTemperature();
+                        barometerTextView.setText(String.format("Air Pressure : %.7s\nTemperature : %.4s",
+                                DataValue.airPressure, DataValue.temperature));
                     }
                 });
             }
@@ -171,7 +197,13 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        caloriesTextView.setText(String.format("%s", bandCaloriesEvent.getCalories()));
+                        DataValue.calories = bandCaloriesEvent.getCalories();
+                        try {
+                            DataValue.caloriesToday = bandCaloriesEvent.getCaloriesToday();
+                        } catch (InvalidBandVersionException e) {
+                            e.printStackTrace();
+                        }
+                        caloriesTextView.setText(String.format("%s", DataValue.caloriesToday));
                     }
                 });
             }
@@ -182,7 +214,8 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        contactTextView.setText(String.format("%s", bandContactEvent.getContactState()));
+                        DataValue.contact = bandContactEvent.getContactState();
+                        contactTextView.setText(String.format("%s", DataValue.contact));
                     }
                 });
             }
@@ -193,8 +226,18 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        distanceTextView.setText(String.format("Current Motion : %s\nPace : %s\nSpeed : %s\nTotal Distance : %s\n",
-                                bandDistanceEvent.getMotionType(), bandDistanceEvent.getPace(), bandDistanceEvent.getSpeed(), bandDistanceEvent.getTotalDistance()));
+
+                        DataValue.motionType = bandDistanceEvent.getMotionType();
+                        DataValue.pace = bandDistanceEvent.getPace();
+                        DataValue.speed = bandDistanceEvent.getSpeed();
+                        try{
+                            DataValue.distanceToday = bandDistanceEvent.getDistanceToday();
+                        } catch (InvalidBandVersionException e) {
+                            e.printStackTrace();
+                        }
+                        DataValue.totalDistance = bandDistanceEvent.getTotalDistance();
+                        distanceTextView.setText(String.format("Current Motion : %s\nPace : %s\nSpeed : %s\nToday\'s Distance : %s\nTotal Distance : %s",
+                                DataValue.motionType, DataValue.pace, DataValue.speed, DataValue.distanceToday, DataValue.totalDistance));
                     }
                 });
             }
@@ -205,7 +248,8 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        gsrTextView.setText(String.format("%s", bandGsrEvent.getResistance()));
+                        DataValue.resistance = bandGsrEvent.getResistance();
+                        gsrTextView.setText(String.format("%s", DataValue.resistance));
                     }
                 });
             }
@@ -216,8 +260,11 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        DataValue.angularVelocityX = bandGyroscopeEvent.getAngularVelocityX();
+                        DataValue.angularVelocityY = bandGyroscopeEvent.getAngularVelocityY();
+                        DataValue.angularVelocityZ = bandGyroscopeEvent.getAngularVelocityZ();
                         gyroscopeTextView.setText(String.format("X : %.4s\nY : %.4s\nZ : %.4s",
-                                bandGyroscopeEvent.getAngularVelocityY(), bandGyroscopeEvent.getAngularVelocityY(), bandGyroscopeEvent.getAngularVelocityZ()));
+                                DataValue.angularVelocityX, DataValue.angularVelocityY, DataValue.angularVelocityZ));
                     }
                 });
             }
@@ -228,7 +275,14 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pedometerTextView.setText(String.format("%s", bandPedometerEvent.getTotalSteps()));
+                        try{
+                            DataValue.stepToday = bandPedometerEvent.getStepsToday();
+                        } catch (InvalidBandVersionException e) {
+                            e.printStackTrace();
+                        }
+                        DataValue.totalStep = bandPedometerEvent.getTotalSteps();
+
+                        pedometerTextView.setText(String.format("%s", DataValue.stepToday));
                     }
                 });
             }
@@ -239,7 +293,8 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        rrIntervalTextView.setText(String.format("%.4s", bandRRIntervalEvent.getInterval()));
+                        DataValue.rrInterval = bandRRIntervalEvent.getInterval();
+                        rrIntervalTextView.setText(String.format("%.4s", DataValue.rrInterval));
                     }
                 });
             }
@@ -250,7 +305,9 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        skinTemperatureTextView.setText(String.format("%s", bandSkinTemperatureEvent.getTemperature()));                    }
+                        DataValue.skinTemperature = bandSkinTemperatureEvent.getTemperature();
+                        skinTemperatureTextView.setText(String.format("%s", DataValue.skinTemperature));
+                    }
                 });
             }
         };
@@ -260,7 +317,8 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        uvTextView.setText(String.format("Index Level : %s\n", bandUVEvent.getUVIndexLevel()));
+                        DataValue.uvIndexValue = bandUVEvent.getUVIndexLevel();
+                        uvTextView.setText(String.format("Index Level : %s\n", DataValue.uvIndexValue));
                     }
                 });
             }
@@ -309,6 +367,9 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                     bandClient.getSensorManager().registerRRIntervalEventListener(rrIntervalEventListener);
                     bandClient.getSensorManager().registerSkinTemperatureEventListener(skinTemperatureEventListener);
                     bandClient.getSensorManager().registerUVEventListener(uvEventListener);
+                    fwVersion = bandClient.getFirmwareVersion().await();
+                    hwVersion = bandClient.getHardwareVersion().await();
+                    Log.d("version info", fwVersion + "\n" + hwVersion);
                 }
 
             }else{

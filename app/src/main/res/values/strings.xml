@@ -13,7 +13,7 @@
     <string name="distance_title">Distance</string>
     <string name="gsr_title">Risistance</string>
     <string name="rr_interval_title">Interval</string>
-    <string name="pedometer_title">Total Steps</string>
+    <string name="pedometer_title">Today\'s Steps</string>
     <string name="skin_temperature_title">Skin Temp.</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -45,7 +45,7 @@ public class StatisticsFragment extends Fragment {
                 distanceTextView, gsrTextView, gyroscopeTextView, pedometerTextView, rrIntervalTextView, skinTemperatureTextView, uvTextView);
         myTask.execute("");
 
-        Intent intent = new Intent(getActivity(), BandDataSenderIntentService.class);
+        Intent intent = new Intent(getActivity(), BandDataSenderService.class);
         getActivity().startService(intent);
         return view;
     }
