@@ -306,7 +306,7 @@ public class BandDataCollectionTask extends AsyncTask<String, String, String> {
                     @Override
                     public void run() {
                         DataValue.skinTemperature = bandSkinTemperatureEvent.getTemperature();
-                        skinTemperatureTextView.setText(String.format("%s", DataValue.skinTemperature));
+                        skinTemperatureTextView.setText(String.format("%.5s", DataValue.skinTemperature));
                     }
                 });
             }

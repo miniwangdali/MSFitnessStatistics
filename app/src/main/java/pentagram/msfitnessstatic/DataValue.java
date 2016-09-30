@@ -11,12 +11,16 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Date;
 
 /**
  * Created by wang_ on 2016/9/26.
  */
 
 public class DataValue {
+    public static Date date = null;
+    public static Date time = null;
+
     public static int heartRate = 0;
     public static HeartRateQuality heartQuality = HeartRateQuality.ACQUIRING;
 
@@ -92,12 +96,12 @@ public class DataValue {
             xmlSerializer.endTag(null, "Accelerometer");
 
             xmlSerializer.startTag(null, "Altimeter");
-            xmlSerializer.startTag(null, "FlightsAsendedToday");
+            xmlSerializer.startTag(null, "FlightsAscendedToday");
             xmlSerializer.text(String.format("%s", flightsAscendedToday));
-            xmlSerializer.endTag(null, "FlightsAsendedToday");
-            xmlSerializer.startTag(null, "FlightsAsended");
+            xmlSerializer.endTag(null, "FlightsAscendedToday");
+            xmlSerializer.startTag(null, "FlightsAscended");
             xmlSerializer.text(String.format("%s", flightsAscended));
-            xmlSerializer.endTag(null, "FlightsAsended");
+            xmlSerializer.endTag(null, "FlightsAscended");
             xmlSerializer.startTag(null, "FlightsDescended");
             xmlSerializer.text(String.format("%s", flightsDescended));
             xmlSerializer.endTag(null, "FlightsDescended");
@@ -174,10 +178,6 @@ public class DataValue {
             xmlSerializer.startTag(null, "Gsr");
             xmlSerializer.text(String.format("%s", resistance));
             xmlSerializer.endTag(null, "Gsr");
-
-            xmlSerializer.startTag(null, "Pace");
-            xmlSerializer.text(String.format("%s", pace));
-            xmlSerializer.endTag(null, "Pace");
 
             xmlSerializer.startTag(null, "Gyroscope");
             xmlSerializer.startTag(null, "X");

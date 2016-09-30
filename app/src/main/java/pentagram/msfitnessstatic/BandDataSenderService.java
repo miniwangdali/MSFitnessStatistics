@@ -39,7 +39,7 @@ public class BandDataSenderService extends Service {
                     try{
                         Thread.sleep(1000);
                         socket = new Socket();
-                        socket.connect(new InetSocketAddress("172.16.8.160", 12306), 5000);
+                        socket.connect(new InetSocketAddress("172.16.15.21", 12306), 5000);
                         OutputStream outputStream = socket.getOutputStream();
                         //Log.d("send", "run: sending data");
                         String output = DataValue.getAllData();
